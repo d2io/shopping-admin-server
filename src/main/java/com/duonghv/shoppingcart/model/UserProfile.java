@@ -89,8 +89,8 @@ public class UserProfile {
                     CascadeType.MERGE
             })
     @JoinTable(name = "webpages_usersinroles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+            joinColumns = {@JoinColumn(name = "UserId")},
+            inverseJoinColumns = {@JoinColumn(name = "RoleId")})
     private Set<WebpagesRole> webpagesRoles = new HashSet<>();
 
     public UserProfile() {
