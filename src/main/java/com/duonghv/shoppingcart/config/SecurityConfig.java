@@ -1,7 +1,7 @@
 package com.duonghv.shoppingcart.config;
 
-import com.duonghv.shoppingcart.security.JWTAuthenticationFilter;
 import com.duonghv.shoppingcart.security.JwtAuthenticationEntryPoint;
+import com.duonghv.shoppingcart.security.JwtAuthenticationFilter;
 import com.duonghv.shoppingcart.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Bean
-    public JWTAuthenticationFilter jwtAuthenticationFilter() {
-        return new JWTAuthenticationFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
 
     @Override

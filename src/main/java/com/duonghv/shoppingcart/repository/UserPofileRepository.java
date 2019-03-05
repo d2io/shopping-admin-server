@@ -21,6 +21,9 @@ public interface UserPofileRepository extends CrudRepository<UserProfile, Long> 
 
     List<UserProfile> findByIdIn(List<Long> userIds);
 
+    @Override
+    Optional<UserProfile> findById(Long aLong);
+
     Optional<UserProfile> findByUsername(String username);
 
     Boolean existsByUsername(String username);
