@@ -1,6 +1,7 @@
 package com.duonghv.shoppingcart.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,9 +17,11 @@ import java.util.Set;
  * Created: 24/02/2019 15:15
  */
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "userprofile")
+@Table(name = "userprofile", uniqueConstraints = { //
+        @UniqueConstraint(name = "fk_UserId", columnNames = "UserId")})
 public class UserProfile {
 
     @Id
@@ -28,6 +31,10 @@ public class UserProfile {
     @Column(name = "UserName", nullable = false)
     @Size(max = 56)
     private String userName;
+
+    @Column(name = "Password", nullable = false)
+    @Size(max = 56)
+    private String password;
 
     @Column(name = "FirstName", nullable = false)
     @Size(max = 255)
@@ -96,20 +103,10 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    public UserProfile(@Size(max = 56) String userName,
-                       @Size(max = 255) String firstName,
-                       @Size(max = 255) String lastName,
-                       Byte gender,
-                       @Email @Size(max = 255) String email,
-                       @Size(max = 255) String phone,
-                       @Size(max = 255) String address,
-                       @Size(max = 1000) String note,
-                       @NotNull Date dateCreated,
-                       @NotNull Date dateUpdated,
-                       @Size(max = 255) String createBy,
-                       @Size(max = 255) String updateBy,
-                       Byte isActive, Byte isDeleted) {
+    public UserProfile(Long userId, @Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, Byte gender, @Email @Size(max = 255) String email, @Size(max = 255) String phone, @Size(max = 255) String address, @Size(max = 1000) String note, @NotNull Date dateCreated, @NotNull Date dateUpdated, @Size(max = 255) String createBy, @Size(max = 255) String updateBy, Byte isActive, Byte isDeleted) {
+        this.userId = userId;
         this.userName = userName;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -123,5 +120,13 @@ public class UserProfile {
         this.updateBy = updateBy;
         this.isActive = isActive;
         this.isDeleted = isDeleted;
+    }
+
+    public UserProfile(@Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, @Email @Size(max = 255) String email) {
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 }

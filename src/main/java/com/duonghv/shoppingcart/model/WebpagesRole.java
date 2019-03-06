@@ -16,7 +16,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "webpages_roles")
+@Table(name = "webpages_roles", uniqueConstraints = { //
+        @UniqueConstraint(name = "fk_RoleId", columnNames = "RoleId")})
 public class WebpagesRole {
 
     @Id

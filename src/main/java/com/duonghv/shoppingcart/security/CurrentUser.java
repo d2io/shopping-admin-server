@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.annontation;
+package com.duonghv.shoppingcart.security;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
