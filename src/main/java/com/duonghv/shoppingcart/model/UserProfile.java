@@ -68,12 +68,12 @@ public class UserProfile {
 
     @NotNull
     @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateCreated;
 
     @Column(name = "DateUpdated")
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateUpdated;
 
     @Column(name = "CreateBy")
@@ -85,16 +85,13 @@ public class UserProfile {
     private String updateBy;
 
     @Column(name = "IsActive")
-    private Byte isActive;
+    private Byte isActive = 0;
 
     @Column(name = "IsDeleted")
-    private Byte isDeleted;
+    private Byte isDeleted = 0;
 
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+            cascade = CascadeType.ALL)
     @JoinTable(name = "webpages_usersinroles",
             joinColumns = {@JoinColumn(name = "UserId")},
             inverseJoinColumns = {@JoinColumn(name = "RoleId")})
@@ -122,11 +119,17 @@ public class UserProfile {
         this.isDeleted = isDeleted;
     }
 
-    public UserProfile(@Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, @Email @Size(max = 255) String email) {
+    public UserProfile(@Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, Byte gender, @Email @Size(max = 255) String email, @Size(max = 255) String phone, @Size(max = 255) String address) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
         this.email = email;
+        this.phone = phone;
+        this.address = address;
+
+        this.isDeleted = 0;
+        this.dateCreated = new Date();
     }
 }

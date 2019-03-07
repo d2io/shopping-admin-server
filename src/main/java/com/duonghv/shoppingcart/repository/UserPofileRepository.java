@@ -4,7 +4,6 @@ import com.duonghv.shoppingcart.model.UserProfile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -17,16 +16,14 @@ import java.util.Optional;
 public interface UserPofileRepository extends CrudRepository<UserProfile, Long> {
     Optional<UserProfile> findByEmail(String email);
 
-    Optional<UserProfile> findByUsernameOrEmail(String username, String email);
-
-    List<UserProfile> findByIdIn(List<Long> userIds);
+    Optional<UserProfile> findByUserNameOrEmail(String userName, String email);
 
     @Override
     Optional<UserProfile> findById(Long aLong);
 
-    Optional<UserProfile> findByUsername(String username);
+    Optional<UserProfile> findByUserName(String userName);
 
-    Boolean existsByUsername(String username);
+    Boolean existsByUserName(String userName);
 
     Boolean existsByEmail(String email);
 }

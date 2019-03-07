@@ -39,20 +39,24 @@ import java.util.Collections;
 @RequestMapping("api/auth")
 public class AuthController {
 
-    @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
+
+    private UserPofileRepository userPofileRepository;
+
+    private WebpagesRoleRepository webpagesRoleRepository;
+
+    private PasswordEncoder passwordEncoder;
+
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    UserPofileRepository userPofileRepository;
-
-    @Autowired
-    WebpagesRoleRepository webpagesRoleRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    public AuthController(AuthenticationManager authenticationManager, UserPofileRepository userPofileRepository, WebpagesRoleRepository webpagesRoleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
+        this.authenticationManager = authenticationManager;
+        this.userPofileRepository = userPofileRepository;
+        this.webpagesRoleRepository = webpagesRoleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -72,7 +76,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (userPofileRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userPofileRepository.existsByUserName(signUpRequest.getUserName())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -83,12 +87,18 @@ public class AuthController {
         }
 
         // Create user's account
-        UserProfile userProfile = new UserProfile(signUpRequest.getUsername(),
+        UserProfile userProfile = new UserProfile(
+                signUpRequest.getUserName(),
                 signUpRequest.getPassword(),
-                signUpRequest.getName(), signUpRequest.getName(),
-                signUpRequest.getEmail());
+                signUpRequest.getFirstName(),
+                signUpRequest.getLastName(),
+                signUpRequest.getGender(),
+                signUpRequest.getEmail(),
+                signUpRequest.getPhone(),
+                signUpRequest.getAddress());
+
         userProfile.setPassword(passwordEncoder.encode(userProfile.getPassword()));
-        WebpagesRole role = webpagesRoleRepository.findByName(RoleName.ROLE_USER)
+        WebpagesRole role = webpagesRoleRepository.findByRoleName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
         userProfile.setWebpagesRoles(Collections.singleton(role));

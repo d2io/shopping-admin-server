@@ -37,7 +37,7 @@ public class WebpagesRole {
 
     @NotNull
     @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateUpdated;
 
     @Column(name = "CreateBy")
@@ -52,12 +52,7 @@ public class WebpagesRole {
     @Column(name = "IsDeleted")
     private Byte isDeleted;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST
-            },
-            mappedBy = "webpagesRoles")
+    @ManyToMany(mappedBy = "webpagesRoles")
     private Set<UserProfile> userProfiles = new HashSet<>();
 
     public WebpagesRole() {

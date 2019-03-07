@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String userNameOrEmail) throws UsernameNotFoundException {
         // Let people login either user or email
-        UserProfile userProfile = userPofileRepository.findByUsernameOrEmail(userNameOrEmail, userNameOrEmail)
+        UserProfile userProfile = userPofileRepository.findByUserNameOrEmail(userNameOrEmail, userNameOrEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username or email " + userNameOrEmail));
 
 

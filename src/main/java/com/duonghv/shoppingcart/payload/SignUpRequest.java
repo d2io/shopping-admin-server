@@ -2,7 +2,9 @@ package com.duonghv.shoppingcart.payload;
 
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -15,18 +17,32 @@ import javax.validation.constraints.Size;
 public class SignUpRequest {
 
     @NotBlank
-    @Size(min = 4, max = 40)
-    private String name;
+    @Size(min = 2, max = 10)
+    private String firstName;
+
+    @NotBlank
+    @Size(min = 2, max = 10)
+    private String lastName;
 
     @NotBlank
     @Size(min = 3, max = 15)
-    private String username;
+    private String userName;
 
     @NotBlank
     @Size(max = 40)
+    @Email
     private String email;
 
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
+
+    @NotNull
+    private Byte gender;
+
+    @Size(max = 255)
+    private String phone;
+
+    @Size(max = 255)
+    private String address;
 }

@@ -15,5 +15,5 @@ import java.util.Optional;
 
 @Repository
 public interface WebpagesRoleRepository extends CrudRepository<WebpagesRole, Long> {
-    Optional<WebpagesRole> findByName(RoleName roleName);
+    Optional<WebpagesRole> findByRoleName(RoleName roleName);
 }
