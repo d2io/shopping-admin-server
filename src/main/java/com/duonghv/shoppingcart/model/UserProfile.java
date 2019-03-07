@@ -20,11 +20,11 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "userprofile", uniqueConstraints = { //
-        @UniqueConstraint(name = "fk_UserId", columnNames = "UserId")})
+@Table(name = "userprofile")
 public class UserProfile {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId", nullable = false)
     private Long userId;
 

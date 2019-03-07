@@ -16,11 +16,11 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "webpages_roles", uniqueConstraints = { //
-        @UniqueConstraint(name = "fk_RoleId", columnNames = "RoleId")})
+@Table(name = "webpages_roles")
 public class WebpagesRole {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoleId")
     private Long roleId;
 
