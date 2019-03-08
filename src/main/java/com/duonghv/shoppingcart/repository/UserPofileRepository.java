@@ -1,7 +1,7 @@
 package com.duonghv.shoppingcart.repository;
 
 import com.duonghv.shoppingcart.model.UserProfile;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,13 +13,12 @@ import java.util.Optional;
  */
 
 @Repository
-public interface UserPofileRepository extends CrudRepository<UserProfile, Long> {
+public interface UserPofileRepository extends JpaRepository<UserProfile, Long> {
     Optional<UserProfile> findByEmail(String email);
 
     Optional<UserProfile> findByUserNameOrEmail(String userName, String email);
 
-    @Override
-    Optional<UserProfile> findById(Long aLong);
+    Optional<UserProfile> findByUserId(Long aLong);
 
     Optional<UserProfile> findByUserName(String userName);
 

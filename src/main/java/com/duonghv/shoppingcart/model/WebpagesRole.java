@@ -1,6 +1,7 @@
 package com.duonghv.shoppingcart.model;
 
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,8 +25,10 @@ public class WebpagesRole {
     @Column(name = "RoleId")
     private Long roleId;
 
+    @Enumerated(EnumType.STRING)
+    @NaturalId
     @Column(name = "RoleName")
-    private String roleName;
+    private RoleName roleName;
 
     @Column(name = "Detail")
     private String detail;
@@ -37,7 +40,7 @@ public class WebpagesRole {
 
     @NotNull
     @Column(name = "DateUpdated")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
 
     @Column(name = "CreateBy")
@@ -58,7 +61,7 @@ public class WebpagesRole {
     public WebpagesRole() {
     }
 
-    public WebpagesRole(Long roleId, String roleName, String detail, @NotNull Date dateCreated, @NotNull Date dateUpdated, String createBy, String updateBy, Byte isShow, Byte isDeleted) {
+    public WebpagesRole(Long roleId, RoleName roleName, String detail, @NotNull Date dateCreated, @NotNull Date dateUpdated, String createBy, String updateBy, Byte isShow, Byte isDeleted) {
         this.roleId = roleId;
         this.roleName = roleName;
         this.detail = detail;

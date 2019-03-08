@@ -2,7 +2,7 @@ package com.duonghv.shoppingcart.repository;
 
 import com.duonghv.shoppingcart.model.RoleName;
 import com.duonghv.shoppingcart.model.WebpagesRole;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -14,6 +14,6 @@ import java.util.Optional;
  */
 
 @Repository
-public interface WebpagesRoleRepository extends CrudRepository<WebpagesRole, Long> {
+public interface WebpagesRoleRepository extends JpaRepository<WebpagesRole, Long> {
     Optional<WebpagesRole> findByRoleName(RoleName roleName);
 }

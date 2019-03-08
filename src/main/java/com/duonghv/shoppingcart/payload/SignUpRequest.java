@@ -40,7 +40,7 @@ public class SignUpRequest {
     @NotNull
     private Byte gender;
 
-    @Size(max = 255)
+    @Size(max = 11)
     private String phone;
 
     @Size(max = 255)

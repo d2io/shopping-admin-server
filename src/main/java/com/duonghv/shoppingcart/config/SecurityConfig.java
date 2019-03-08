@@ -34,11 +34,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {

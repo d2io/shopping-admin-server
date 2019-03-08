@@ -68,12 +68,12 @@ public class UserProfile {
 
     @NotNull
     @Column(name = "DateCreated")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
     @Column(name = "DateUpdated")
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
 
     @Column(name = "CreateBy")
