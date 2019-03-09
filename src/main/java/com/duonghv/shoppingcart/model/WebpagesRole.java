@@ -36,12 +36,12 @@ public class WebpagesRole {
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
+    private Date dateCreated = new Date();
 
     @NotNull
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated;
+    private Date dateUpdated = new Date();
 
     @Column(name = "CreateBy")
     private String createBy;
@@ -50,10 +50,10 @@ public class WebpagesRole {
     private String updateBy;
 
     @Column(name = "IsShow")
-    private Byte isShow;
+    private Byte isShow = 1;
 
     @Column(name = "IsDeleted")
-    private Byte isDeleted;
+    private Byte isDeleted = 0;
 
     @ManyToMany(mappedBy = "webpagesRoles")
     private Set<UserProfile> userProfiles = new HashSet<>();
@@ -61,8 +61,7 @@ public class WebpagesRole {
     public WebpagesRole() {
     }
 
-    public WebpagesRole(Long roleId, RoleName roleName, String detail, @NotNull Date dateCreated, @NotNull Date dateUpdated, String createBy, String updateBy, Byte isShow, Byte isDeleted) {
-        this.roleId = roleId;
+    public WebpagesRole(RoleName roleName, String detail, @NotNull Date dateCreated, @NotNull Date dateUpdated, String createBy, String updateBy, Byte isShow, Byte isDeleted) {
         this.roleName = roleName;
         this.detail = detail;
         this.dateCreated = dateCreated;
@@ -71,5 +70,10 @@ public class WebpagesRole {
         this.updateBy = updateBy;
         this.isShow = isShow;
         this.isDeleted = isDeleted;
+    }
+
+    public WebpagesRole(RoleName roleName, String detail) {
+        this.roleName = roleName;
+        this.detail = detail;
     }
 }
