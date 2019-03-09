@@ -30,6 +30,8 @@ public class WebpagesRoleBootstrap implements ApplicationListener<ContextRefresh
     private void initData() {
         WebpagesRole role = new WebpagesRole(RoleName.ROLE_USER, "ROLE_USER");
 
-        webpagesRoleRepository.save(role);
+        if (!webpagesRoleRepository.findByRoleName(RoleName.ROLE_USER).isPresent()) {
+            webpagesRoleRepository.saveAndFlush(role);
+        }
     }
 }

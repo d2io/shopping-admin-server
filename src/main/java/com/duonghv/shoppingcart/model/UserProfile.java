@@ -33,7 +33,7 @@ public class UserProfile {
     private String userName;
 
     @Column(name = "Password", nullable = false)
-    @Size(max = 56)
+    @Size(max = 128)
     private String password;
 
     @Column(name = "FirstName", nullable = false)
@@ -56,12 +56,10 @@ public class UserProfile {
     @Size(max = 255)
     private String phone;
 
-    @Basic
     @Column(name = "Address", nullable = false)
     @Size(max = 255)
     private String address;
 
-    @Basic
     @Column(name = "Note", nullable = false)
     @Size(max = 1000)
     private String note;
@@ -69,12 +67,12 @@ public class UserProfile {
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
+    private Date dateCreated = new Date();
 
     @Column(name = "DateUpdated")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated;
+    private Date dateUpdated = new Date();
 
     @Column(name = "CreateBy")
     @Size(max = 255)
@@ -93,8 +91,8 @@ public class UserProfile {
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JoinTable(name = "webpages_usersinroles",
-            joinColumns = {@JoinColumn(name = "UserId")},
-            inverseJoinColumns = {@JoinColumn(name = "RoleId")})
+            joinColumns = @JoinColumn(name = "UserId"),
+            inverseJoinColumns = @JoinColumn(name = "RoleId"))
     private Set<WebpagesRole> webpagesRoles = new HashSet<>();
 
     public UserProfile() {
@@ -130,6 +128,5 @@ public class UserProfile {
         this.address = address;
 
         this.isDeleted = 0;
-        this.dateCreated = new Date();
     }
 }
