@@ -17,15 +17,17 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
+
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("{app.jwtSecret}")
+    @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    @Value(("{app.jwtExpirationInMs}"))
-    private String jwtExpirationInMs;
+    @Value("${app.jwtExpirationInMs}")
+    private int jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
+
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();

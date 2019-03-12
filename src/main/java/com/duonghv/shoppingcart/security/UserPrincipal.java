@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.security;
 
-import com.duonghv.shoppingcart.model.UserProfile;
+import com.duonghv.shoppingcart.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,22 +33,29 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String firstName, String lastName, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.name = name;
+        this.name = firstName + " " + lastName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
 
-    public static UserPrincipal create(UserProfile user) {
+    public static UserPrincipal create(User user) {
         List<GrantedAuthority> authorities = user.getWebpagesRoles().stream().map(role ->
-                new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
+                new SimpleGrantedAuthority(role.getRoleName().name())
+        ).collect(Collectors.toList());
 
-        return new UserPrincipal(user.getUserId(),
-                user.getFirstName(), user.getUserName(),
-                user.getEmail(), user.getPhone(), authorities);
+        return new UserPrincipal(
+                user.getUserId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getPassword(),
+                authorities
+        );
     }
 
     public Long getId() {
@@ -64,12 +71,12 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
+    public String getUsername() {
         return username;
     }
 
     @Override
-    public String getUsername() {
+    public String getPassword() {
         return password;
     }
 
@@ -108,6 +115,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id);
     }
 }

@@ -1,10 +1,12 @@
 package com.duonghv.shoppingcart.model;
 
+import com.duonghv.shoppingcart.model.audit.DateAudit;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -17,18 +19,25 @@ import java.util.Set;
  * Created: 24/02/2019 15:15
  */
 
+@Entity
+@Table(name = "userprofile", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "UserName"
+        }),
+        @UniqueConstraint(columnNames = {
+                "Email"
+        })
+})
 @Getter
 @Setter
-@Entity
-@Table(name = "userprofile")
-public class UserProfile {
-
+public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId", nullable = false)
     private Long userId;
 
-    @Column(name = "UserName", nullable = false)
+    @NotBlank
+    @Column(name = "UserName")
     @Size(max = 56)
     private String userName;
 
@@ -47,20 +56,21 @@ public class UserProfile {
     @Column(name = "Gender", nullable = false)
     private Byte gender;
 
-    @Column(name = "Email", nullable = false)
+    @NotBlank
+    @Column(name = "Email")
     @Email
     @Size(max = 255)
     private String email;
 
-    @Column(name = "Phone", nullable = false)
+    @Column(name = "Phone")
     @Size(max = 255)
     private String phone;
 
-    @Column(name = "Address", nullable = false)
+    @Column(name = "Address")
     @Size(max = 255)
     private String address;
 
-    @Column(name = "Note", nullable = false)
+    @Column(name = "Note")
     @Size(max = 1000)
     private String note;
 
@@ -88,45 +98,21 @@ public class UserProfile {
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "webpages_usersinroles",
             joinColumns = @JoinColumn(name = "UserId"),
             inverseJoinColumns = @JoinColumn(name = "RoleId"))
-    private Set<WebpagesRole> webpagesRoles = new HashSet<>();
+    private Set<Role> webpagesRoles = new HashSet<>();
 
-    public UserProfile() {
+    public User() {
+
     }
 
-    public UserProfile(Long userId, @Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, Byte gender, @Email @Size(max = 255) String email, @Size(max = 255) String phone, @Size(max = 255) String address, @Size(max = 1000) String note, @NotNull Date dateCreated, @NotNull Date dateUpdated, @Size(max = 255) String createBy, @Size(max = 255) String updateBy, Byte isActive, Byte isDeleted) {
-        this.userId = userId;
+    public User(String userName, String password, String firstName, String lastName, String email) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
         this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.note = note;
-        this.dateCreated = dateCreated;
-        this.dateUpdated = dateUpdated;
-        this.createBy = createBy;
-        this.updateBy = updateBy;
-        this.isActive = isActive;
-        this.isDeleted = isDeleted;
-    }
-
-    public UserProfile(@Size(max = 56) String userName, @Size(max = 56) String password, @Size(max = 255) String firstName, @Size(max = 255) String lastName, Byte gender, @Email @Size(max = 255) String email, @Size(max = 255) String phone, @Size(max = 255) String address) {
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-
-        this.isDeleted = 0;
     }
 }

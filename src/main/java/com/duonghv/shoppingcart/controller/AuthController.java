@@ -1,15 +1,15 @@
 package com.duonghv.shoppingcart.controller;
 
 import com.duonghv.shoppingcart.exception.AppException;
+import com.duonghv.shoppingcart.model.Role;
 import com.duonghv.shoppingcart.model.RoleName;
-import com.duonghv.shoppingcart.model.UserProfile;
-import com.duonghv.shoppingcart.model.WebpagesRole;
+import com.duonghv.shoppingcart.model.User;
 import com.duonghv.shoppingcart.payload.ApiResponse;
 import com.duonghv.shoppingcart.payload.JwtAuthenticationResponse;
 import com.duonghv.shoppingcart.payload.LoginRequest;
 import com.duonghv.shoppingcart.payload.SignUpRequest;
-import com.duonghv.shoppingcart.repository.UserPofileRepository;
-import com.duonghv.shoppingcart.repository.WebpagesRoleRepository;
+import com.duonghv.shoppingcart.repository.RoleRepository;
+import com.duonghv.shoppingcart.repository.UserRepository;
 import com.duonghv.shoppingcart.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,85 +30,72 @@ import java.net.URI;
 import java.util.Collections;
 
 /**
- * Class: AuthController
- * Author: DuongHV
- * Created: 06/03/2019 00:24
+ * Created by rajeevkumarsingh on 02/08/17.
  */
-
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
-    private AuthenticationManager authenticationManager;
-
-    private UserPofileRepository userPofileRepository;
-
-    private WebpagesRoleRepository webpagesRoleRepository;
-
-    private PasswordEncoder passwordEncoder;
-
-    private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, UserPofileRepository userPofileRepository, WebpagesRoleRepository webpagesRoleRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
-        this.authenticationManager = authenticationManager;
-        this.userPofileRepository = userPofileRepository;
-        this.webpagesRoleRepository = webpagesRoleRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
+    UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    JwtTokenProvider tokenProvider;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUserNameOrEmail(),
+                        loginRequest.getUsernameOrEmail(),
                         loginRequest.getPassword()
                 )
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtTokenProvider.generateToken(authentication);
+        String jwt = tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (userPofileRepository.existsByUserName(signUpRequest.getUserName())) {
+        if (userRepository.existsByUserName(signUpRequest.getUserName())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        if (userPofileRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email is already taken!"),
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        // Create user's account
-        UserProfile userProfile = new UserProfile(
-                signUpRequest.getUserName(),
-                signUpRequest.getPassword(),
-                signUpRequest.getFirstName(),
-                signUpRequest.getLastName(),
-                signUpRequest.getGender(),
-                signUpRequest.getEmail(),
-                signUpRequest.getPhone(),
-                signUpRequest.getAddress());
+        // Creating user's account
+        User user = new User(signUpRequest.getUserName(), signUpRequest.getPassword(),
+                signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail());
 
-        userProfile.setPassword(passwordEncoder.encode(userProfile.getPassword()));
-        WebpagesRole role = webpagesRoleRepository.findByRoleName(RoleName.ROLE_USER)
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role userRole = roleRepository.findByRoleName(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User Role not set."));
 
-        userProfile.setWebpagesRoles(Collections.singleton(role));
+        user.setWebpagesRoles(Collections.singleton(userRole));
 
-        UserProfile result = userPofileRepository.save(userProfile);
+        User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
+                .fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUserName()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User regitered successfully!"));
+        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 }
