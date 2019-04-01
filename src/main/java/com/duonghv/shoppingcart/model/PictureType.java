@@ -4,7 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,15 +34,12 @@ public class PictureType {
     @Column(name = "Detail")
     private String detail;
 
+    @OneToMany
+    public List<PictureType> subPictureTypes = new ArrayList<>();
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-
-    @NotNull
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated;
+    private Date dateCreated = new Date();
 
     @NotNull
     @Column(name = "CreatedBy")
@@ -61,20 +60,20 @@ public class PictureType {
     @NotNull
     @Column(name = "SeoKeyword")
     private String seoKeyword;
-
+    @NotNull
+    @Column(name = "DateUpdated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateUpdated = new Date();
     @NotNull
     @Column(name = "IsShow")
-    private Byte isShow;
-
+    private Byte isShow = 1;
     @NotNull
     @Column(name = "IsDeleted")
-    private Byte isDeleted;
-
-    @OneToMany(mappedBy = "tbltypepicture", cascade = CascadeType.ALL)
-    @JoinColumn(name = "PictureId")
+    private Byte isDeleted = 0;
+    @OneToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "TypeID"))
     private Set<Picture> picture;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "Parent")
     private PictureType parent;
 }

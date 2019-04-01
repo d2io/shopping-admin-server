@@ -3,7 +3,6 @@ package com.duonghv.shoppingcart.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -14,7 +13,6 @@ public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank
     @Column(name = "ID")
     private long id;
 
@@ -25,10 +23,6 @@ public class Picture {
     @NotNull
     @Column(name = "FileName")
     private String fileName;
-
-    @NotNull
-    @Column(name = "TypeID")
-    private long typeId;
 
     @NotNull
     @Column(name = "Summary")
@@ -49,29 +43,28 @@ public class Picture {
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
+    private Date dateCreated = new Date();
 
     @NotNull
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
-    private java.sql.Timestamp dateUpdated;
+    private Date dateUpdated = new Date();
 
-    @NotNull
     @Column(name = "CreatedBy")
     private String createdBy;
 
-    @NotNull
     @Column(name = "UpdatedBy")
     private String updatedBy;
 
     @NotNull
     @Column(name = "IsShow")
-    private Byte isShow;
+    private Byte isShow = 1;
 
     @NotNull
     @Column(name = "IsDeleted")
-    private Byte isDeleted;
+    private Byte isDeleted = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "TypeID")
     private PictureType pictureType;
 }

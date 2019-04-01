@@ -16,15 +16,28 @@ import java.nio.file.Paths;
 
 @Configuration
 public class FileConfig {
+    private final String ROOT_FOLDER = System.getProperty("user.dir") + "/";
 
     @Value("${app.file.uploaded}")
     private String rootPictureFolder;
 
+    @Value("${app.file.uploaded.origin}")
+    private String originFolder;
+
+    @Value("${app.file.uploaded.thumbnail}")
+    private String thumbnailFolder;
+
     @Bean
     public void createFolderIfNotExist() {
-        String path = System.getProperty("user.dir") + "/" + rootPictureFolder;
+        String originalPath = ROOT_FOLDER + rootPictureFolder + originFolder;
+        String thumbnailPath = ROOT_FOLDER + rootPictureFolder + thumbnailFolder;
+        ;
 
-        if (!Files.exists(Paths.get(path)))
-            new File(path).mkdirs();
+        if (!Files.exists(Paths.get(originalPath)))
+            new File(originalPath).mkdirs();
+
+        if (!Files.exists(Paths.get(thumbnailPath)))
+            new File(thumbnailPath).mkdirs();
+
     }
 }
