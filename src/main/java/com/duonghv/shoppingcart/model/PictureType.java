@@ -1,5 +1,7 @@
 package com.duonghv.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -34,8 +36,6 @@ public class PictureType {
     @Column(name = "Detail")
     private String detail;
 
-    @OneToMany
-    public List<PictureType> subPictureTypes = new ArrayList<>();
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
@@ -60,20 +60,28 @@ public class PictureType {
     @NotNull
     @Column(name = "SeoKeyword")
     private String seoKeyword;
+
     @NotNull
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated = new Date();
+
     @NotNull
     @Column(name = "IsShow")
     private Byte isShow = 1;
+
     @NotNull
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
-    @OneToMany
-    @JoinTable(inverseJoinColumns = @JoinColumn(name = "TypeID"))
+
+    @OneToMany(mappedBy = "parent")
+    @JsonBackReference
+    public List<PictureType> subFolders = new ArrayList<>();
+    @OneToMany(mappedBy = "pictureType", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<Picture> picture;
     @ManyToOne
     @JoinColumn(name = "Parent")
+    @JsonManagedReference
     private PictureType parent;
 }

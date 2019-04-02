@@ -1,5 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -64,7 +65,8 @@ public class Picture {
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "TypeID")
+    @JsonManagedReference
     private PictureType pictureType;
 }
