@@ -3,17 +3,21 @@ package com.duonghv.shoppingcart.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "tbltypepicture")
 @Data
+@EntityListeners(AuditingEntityListener.class)
 public class PictureType {
 
     @Id
@@ -36,18 +40,18 @@ public class PictureType {
     @Column(name = "Detail")
     private String detail;
 
+    @OneToMany(mappedBy = "parent")
+    @JsonBackReference
+    public Set<PictureType> subFolders;
     @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated = new Date();
-
+    @CreatedDate
+    private Date dateCreated;
     @NotNull
     @Column(name = "CreatedBy")
+    @CreatedBy
     private String createdBy;
-
-    @NotNull
-    @Column(name = "UpdatedBy")
-    private String updatedBy;
 
     @NotNull
     @Column(name = "SeoTitle")
@@ -60,11 +64,10 @@ public class PictureType {
     @NotNull
     @Column(name = "SeoKeyword")
     private String seoKeyword;
-
     @NotNull
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated = new Date();
+    @Column(name = "UpdatedBy")
+    @LastModifiedBy
+    private String updatedBy;
 
     @NotNull
     @Column(name = "IsShow")
@@ -73,13 +76,16 @@ public class PictureType {
     @NotNull
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
+    @NotNull
+    @Column(name = "DateUpdated")
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date dateUpdated;
 
-    @OneToMany(mappedBy = "parent")
-    @JsonBackReference
-    public List<PictureType> subFolders = new ArrayList<>();
     @OneToMany(mappedBy = "pictureType", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Picture> picture;
+
     @ManyToOne
     @JoinColumn(name = "Parent")
     @JsonManagedReference

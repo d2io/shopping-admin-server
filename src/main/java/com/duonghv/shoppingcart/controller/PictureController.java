@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/picture")
+@RequestMapping("/api/v1/picture")
 public class PictureController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class PictureController {
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-    @GetMapping("/type")
+    @GetMapping("/types")
     public List<PictureType> getPictureTypes() {
         List<PictureType> pictureTypeList = pictureTypeRepository.findAll();
         return pictureTypeList;

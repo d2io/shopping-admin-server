@@ -3,6 +3,10 @@ package com.duonghv.shoppingcart.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,16 +34,20 @@ public class Role {
 
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated = new Date();
+    @CreatedDate
+    private Date dateCreated;
 
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated = new Date();
+    @LastModifiedDate
+    private Date dateUpdated;
 
     @Column(name = "CreateBy")
+    @CreatedBy
     private String createBy;
 
     @Column(name = "UpdateBy")
+    @LastModifiedBy
     private String updateBy;
 
     @Column(name = "IsShow")

@@ -3,11 +3,14 @@ package com.duonghv.shoppingcart.model;
 import com.duonghv.shoppingcart.model.audit.DateAudit;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
@@ -74,22 +77,24 @@ public class User extends DateAudit {
     @Size(max = 1000)
     private String note;
 
-    @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated = new Date();
+    @CreatedDate
+    private Date dateCreated;
 
     @Column(name = "DateUpdated")
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated = new Date();
+    @LastModifiedDate
+    private Date dateUpdated;
 
     @Column(name = "CreateBy")
     @Size(max = 255)
+    @CreatedBy
     private String createBy;
 
     @Column(name = "UpdateBy")
     @Size(max = 255)
+    @LastModifiedBy
     private String updateBy;
 
     @Column(name = "IsActive")
