@@ -1,7 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -22,6 +21,7 @@ public class PictureType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 
     @NotNull
@@ -36,19 +36,18 @@ public class PictureType {
     @Column(name = "Number")
     private Long number;
 
+    @Column(name = "PictureID")
+    private Long pictureId;
+
     @NotNull
     @Column(name = "Detail")
     private String detail;
 
-    @OneToMany(mappedBy = "parent")
-    @JsonBackReference
-    public Set<PictureType> subFolders;
-    @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date dateCreated;
-    @NotNull
+
     @Column(name = "CreatedBy")
     @CreatedBy
     private String createdBy;
@@ -61,10 +60,9 @@ public class PictureType {
     @Column(name = "SeoDescription")
     private String seoDescription;
 
-    @NotNull
     @Column(name = "SeoKeyword")
     private String seoKeyword;
-    @NotNull
+
     @Column(name = "UpdatedBy")
     @LastModifiedBy
     private String updatedBy;
@@ -76,7 +74,7 @@ public class PictureType {
     @NotNull
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
-    @NotNull
+
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
@@ -86,8 +84,6 @@ public class PictureType {
     @JsonBackReference
     private Set<Picture> picture;
 
-    @ManyToOne
-    @JoinColumn(name = "Parent")
-    @JsonManagedReference
-    private PictureType parent;
+    @Column(name = "Parent")
+    private Long parent;
 }

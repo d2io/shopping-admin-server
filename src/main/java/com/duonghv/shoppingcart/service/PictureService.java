@@ -1,11 +1,11 @@
 package com.duonghv.shoppingcart.service;
 
 import com.duonghv.shoppingcart.model.Picture;
-import com.duonghv.shoppingcart.model.PictureType;
 import com.duonghv.shoppingcart.payload.PictureRequest;
 import com.duonghv.shoppingcart.repository.PictureRepository;
 import com.duonghv.shoppingcart.repository.PictureTypeRepository;
 import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,10 +26,14 @@ import java.io.IOException;
 @Service
 public class PictureService {
 
-    private final String ROOT_FOLDER = System.getProperty("user.dir") + "/";
-    private final PictureTypeRepository pictureTypeRepository;
-    private final PictureRepository pictureRepository;
-    private Picture picture = new Picture();
+    private final String ROOT_FOLDER = System.getProperty("user.dir");
+
+    @Autowired
+    PictureTypeRepository pictureTypeRepository;
+
+    @Autowired
+    PictureRepository pictureRepository;
+
     @Value("${app.file.uploaded}")
     private String rootPictureFolder;
 
@@ -42,18 +46,12 @@ public class PictureService {
     @Value("${app.file.thumbnail.width}")
     private int thumbnailWidth;
 
-    public PictureService(PictureTypeRepository pictureTypeRepository,
-                          PictureRepository pictureRepository) {
-        this.pictureTypeRepository = pictureTypeRepository;
-        this.pictureRepository = pictureRepository;
-    }
-
-
     public synchronized boolean savePicture(PictureRequest request) {
         String originalPath = ROOT_FOLDER + rootPictureFolder + originFolder;
         String thumbnailPath = ROOT_FOLDER + rootPictureFolder + thumbnailFolder;
 
         MultipartFile file = request.getFile();
+        String fileExtension = file.getOriginalFilename().split("\\.")[1];
 
         File originalImageFile = new File(originalPath + file.getOriginalFilename());
         File thumbnailImageFile = new File(thumbnailPath + file.getOriginalFilename());
@@ -71,13 +69,16 @@ public class PictureService {
             foutThumbnail.write(createThumbnail(file, thumbnailWidth).toByteArray());
             foutThumbnail.close();
 
-            picture.setFileName(originalPath);
+            Picture picture = new Picture();
+
+            picture.setId(6666L);
+            picture.setFileName(request.getName());
             picture.setName(request.getName());
             picture.setAlt(request.getAlt());
             picture.setLink(request.getLink());
             picture.setSummary(request.getSummary());
-            PictureType pictureType = pictureTypeRepository.findById(request.getTypeId()).orElse(null);
-            picture.setPictureType(pictureType);
+//            PictureType pictureType = pictureTypeRepository.findById(18L).orElse(null);
+//            picture.setPictureType(null);
             picture.setSize(file.getSize());
 
             pictureRepository.save(picture);

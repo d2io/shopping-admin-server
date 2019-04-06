@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 @Configuration
 public class FileConfig {
-    private final String ROOT_FOLDER = System.getProperty("user.dir") + "/";
+    private final String ROOT_FOLDER = System.getProperty("user.dir");
 
     @Value("${app.file.uploaded}")
     private String rootPictureFolder;

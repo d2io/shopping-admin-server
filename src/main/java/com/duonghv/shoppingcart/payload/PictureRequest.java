@@ -19,9 +19,9 @@ public class PictureRequest {
 
     private Long typeId;
 
-    private String alt;
-
     private String summary;
+
+    private String alt;
 
     private String link;
 

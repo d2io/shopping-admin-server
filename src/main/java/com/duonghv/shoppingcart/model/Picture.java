@@ -21,7 +21,7 @@ public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "Name")
@@ -45,15 +45,13 @@ public class Picture {
 
     @NotNull
     @Column(name = "Size")
-    private long size;
+    private Long size;
 
-    @NotNull
     @Column(name = "DateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date dateCreated;
 
-    @NotNull
     @Column(name = "DateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate

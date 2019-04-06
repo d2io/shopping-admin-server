@@ -23,7 +23,7 @@ import java.io.IOException;
 
 @RestController
 public class FileController {
-    private final String ROOT_FOLDER = System.getProperty("user.dir") + "/";
+    private final String ROOT_FOLDER = System.getProperty("user.dir");
 
     @Value("${app.file.uploaded}")
     private String rootPictureFolder;
