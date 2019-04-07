@@ -1,18 +1,15 @@
 package com.duonghv.shoppingcart.model;
 
-import com.duonghv.shoppingcart.model.audit.DateAudit;
+import com.duonghv.shoppingcart.model.audit.TableAudit;
+import com.duonghv.shoppingcart.payload.SignUpRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +30,7 @@ import java.util.Set;
 })
 @Getter
 @Setter
-public class User extends DateAudit {
+public class User extends TableAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId", nullable = false)
@@ -77,28 +74,8 @@ public class User extends DateAudit {
     @Size(max = 1000)
     private String note;
 
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date dateCreated;
-
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date dateUpdated;
-
-    @Column(name = "CreateBy")
-    @Size(max = 255)
-    @CreatedBy
-    private String createBy;
-
-    @Column(name = "UpdateBy")
-    @Size(max = 255)
-    @LastModifiedBy
-    private String updateBy;
-
     @Column(name = "IsActive")
-    private Byte isActive = 0;
+    private Byte isActive = 1;
 
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
@@ -113,11 +90,14 @@ public class User extends DateAudit {
 
     }
 
-    public User(String userName, String password, String firstName, String lastName, String email) {
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public User (SignUpRequest signUpRequest) {
+        this.userName = signUpRequest.getUserName();
+        this.firstName = signUpRequest.getFirstName();
+        this.lastName = signUpRequest.getLastName();
+        this.email = signUpRequest.getEmail();
+        this.gender = signUpRequest.getGender();
+        this.phone = signUpRequest.getPhone();
+        this.address = signUpRequest.getAddress();
+        this.password = signUpRequest.getPassword();
     }
 }

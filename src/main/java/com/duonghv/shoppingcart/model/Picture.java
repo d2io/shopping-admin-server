@@ -1,5 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
+import com.duonghv.shoppingcart.model.audit.TableAudit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
@@ -15,8 +16,7 @@ import java.util.Date;
 @Entity
 @Table(name = "tblpicture")
 @Data
-@EntityListeners(AuditingEntityListener.class)
-public class Picture {
+public class Picture extends TableAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,24 +46,6 @@ public class Picture {
     @NotNull
     @Column(name = "Size")
     private Long size;
-
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date dateCreated;
-
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date dateUpdated;
-
-    @Column(name = "CreatedBy")
-    @CreatedBy
-    private String createdBy;
-
-    @Column(name = "UpdatedBy")
-    @LastModifiedBy
-    private String updatedBy;
 
     @NotNull
     @Column(name = "IsShow")

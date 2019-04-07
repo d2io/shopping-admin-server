@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/page")
+@RequestMapping("/api/v1/page")
 public class PageController {
 
     private static final Logger logger = LoggerFactory.getLogger(PageController.class);

@@ -1,5 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
+import com.duonghv.shoppingcart.model.audit.TableAudit;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
@@ -16,8 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tbltypepicture")
 @Data
-@EntityListeners(AuditingEntityListener.class)
-public class PictureType {
+public class PictureType extends TableAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,15 +43,6 @@ public class PictureType {
     @Column(name = "Detail")
     private String detail;
 
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date dateCreated;
-
-    @Column(name = "CreatedBy")
-    @CreatedBy
-    private String createdBy;
-
     @NotNull
     @Column(name = "SeoTitle")
     private String seoTitle;
@@ -63,10 +54,6 @@ public class PictureType {
     @Column(name = "SeoKeyword")
     private String seoKeyword;
 
-    @Column(name = "UpdatedBy")
-    @LastModifiedBy
-    private String updatedBy;
-
     @NotNull
     @Column(name = "IsShow")
     private Byte isShow = 1;
@@ -74,11 +61,6 @@ public class PictureType {
     @NotNull
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
-
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date dateUpdated;
 
     @OneToMany(mappedBy = "pictureType", cascade = CascadeType.ALL)
     @JsonBackReference

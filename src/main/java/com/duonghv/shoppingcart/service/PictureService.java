@@ -1,6 +1,7 @@
 package com.duonghv.shoppingcart.service;
 
 import com.duonghv.shoppingcart.model.Picture;
+import com.duonghv.shoppingcart.model.PictureType;
 import com.duonghv.shoppingcart.payload.PictureRequest;
 import com.duonghv.shoppingcart.repository.PictureRepository;
 import com.duonghv.shoppingcart.repository.PictureTypeRepository;
@@ -46,7 +47,7 @@ public class PictureService {
     @Value("${app.file.thumbnail.width}")
     private int thumbnailWidth;
 
-    public synchronized boolean savePicture(PictureRequest request) {
+    public synchronized Picture savePicture(PictureRequest request) {
         String originalPath = ROOT_FOLDER + rootPictureFolder + originFolder;
         String thumbnailPath = ROOT_FOLDER + rootPictureFolder + thumbnailFolder;
 
@@ -71,24 +72,23 @@ public class PictureService {
 
             Picture picture = new Picture();
 
-            picture.setId(6666L);
             picture.setFileName(request.getName());
             picture.setName(request.getName());
             picture.setAlt(request.getAlt());
             picture.setLink(request.getLink());
             picture.setSummary(request.getSummary());
-//            PictureType pictureType = pictureTypeRepository.findById(18L).orElse(null);
-//            picture.setPictureType(null);
+            PictureType pictureType = pictureTypeRepository.findById(18L).orElse(null);
+            picture.setPictureType(pictureType);
             picture.setSize(file.getSize());
 
             pictureRepository.save(picture);
 
-            return true;
+            return picture;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return null;
     }
 
     private ByteArrayOutputStream createThumbnail(MultipartFile orginalFile, Integer width) throws IOException {

@@ -1,5 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
+import com.duonghv.shoppingcart.model.audit.TableAudit;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
@@ -7,6 +8,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +20,7 @@ import java.util.Date;
 @Table(name = "webpages_roles")
 @Getter
 @Setter
-public class Role {
+public class Role extends TableAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoleId")
@@ -31,24 +33,6 @@ public class Role {
 
     @Column(name = "Detail")
     private String detail;
-
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date dateCreated;
-
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private Date dateUpdated;
-
-    @Column(name = "CreateBy")
-    @CreatedBy
-    private String createBy;
-
-    @Column(name = "UpdateBy")
-    @LastModifiedBy
-    private String updateBy;
 
     @Column(name = "IsShow")
     private Byte isShow = 1;
@@ -63,4 +47,8 @@ public class Role {
         this.roleName = roleName;
     }
 
+    public Role(RoleName roleName, String detail) {
+        this.roleName = roleName;
+        this.detail = detail;
+    }
 }

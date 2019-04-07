@@ -1,5 +1,6 @@
 package com.duonghv.shoppingcart.model;
 
+import com.duonghv.shoppingcart.model.audit.TableAudit;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,7 @@ import java.util.Date;
 @Table(name = "tblpage")
 @Getter
 @Setter
-public class Page {
+public class Page extends TableAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,24 +59,6 @@ public class Page {
     @Size(max = 4000)
     @Column(name = "Detail")
     private String detail;
-
-    @NotNull
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated = new Date();
-
-    @Column(name = "DateUpdated")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateUpdated = new Date();
-
-    @NotNull
-    @Size(max = 255)
-    @Column(name = "CreateBy")
-    private String createBy;
-
-    @Size(max = 255)
-    @Column(name = "UpdateBy")
-    private String updateBy;
 
     @Column(name = "IsShow")
     private Byte isShow;

@@ -33,7 +33,7 @@ import java.util.Collections;
  * Created by rajeevkumarsingh on 02/08/17.
  */
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     @Autowired
@@ -80,8 +80,7 @@ public class AuthController {
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getUserName(), signUpRequest.getPassword(),
-                signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getEmail());
+        User user = new User(signUpRequest);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

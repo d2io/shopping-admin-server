@@ -15,27 +15,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/user/me")
+    @GetMapping("/me")
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
         return userSummary;
     }
 
-    @GetMapping("/user/checkUsernameAvailability")
+    @GetMapping("/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
         Boolean isAvailable = !userRepository.existsByUserName(username);
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/user/checkEmailAvailability")
+    @GetMapping("/checkEmailAvailability")
     public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
         Boolean isAvailable = !userRepository.existsByEmail(email);
         return new UserIdentityAvailability(isAvailable);
