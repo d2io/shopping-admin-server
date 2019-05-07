@@ -1,8 +1,8 @@
 package com.duonghv.shoppingcart.controller;
 
 import com.duonghv.shoppingcart.exception.ResourceNotFoundException;
-import com.duonghv.shoppingcart.model.Picture;
-import com.duonghv.shoppingcart.model.PictureType;
+import com.duonghv.shoppingcart.model.picture.Picture;
+import com.duonghv.shoppingcart.model.picture.PictureType;
 import com.duonghv.shoppingcart.payload.PictureRequest;
 import com.duonghv.shoppingcart.repository.PictureRepository;
 import com.duonghv.shoppingcart.repository.PictureTypeRepository;

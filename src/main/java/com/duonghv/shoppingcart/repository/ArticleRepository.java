@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.repository;
 
-import com.duonghv.shoppingcart.model.picture.Picture;
+import com.duonghv.shoppingcart.model.article.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,10 +9,10 @@ import java.util.Optional;
 /**
  * Class: PictureRepository
  * Author: DuongHV
- * Created: 31/03/2019 15:04
+ * Created: 07/05/2019 00:17
  */
 
 @Repository
-public interface PictureRepository extends JpaRepository<Picture, Long> {
-    Optional<Picture> findById(Long id);
+public interface ArticleRepository extends JpaRepository<Article, Long> {
+    Optional<Article> findById(Long id);
 }

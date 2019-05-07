@@ -1,23 +1,17 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.article;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbltypepicture")
+@Table(name = "tbltypearticle")
 @Data
-public class PictureType extends TableAudit {
+public class ArticleType extends TableAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,18 +34,26 @@ public class PictureType extends TableAudit {
     private Long pictureId;
 
     @NotNull
+    @Column(name = "Summary")
+    private String summary;
+
+    @NotNull
     @Column(name = "Detail")
     private String detail;
 
     @NotNull
-    @Column(name = "SeoTitle")
+    @Column(name = "LanguageId")
+    private Long languageId;
+
+    @NotNull
+    @Column(name = "SEOTitle")
     private String seoTitle;
 
     @NotNull
-    @Column(name = "SeoDescription")
+    @Column(name = "SEODescription")
     private String seoDescription;
 
-    @Column(name = "SeoKeyword")
+    @Column(name = "SEOKeyword")
     private String seoKeyword;
 
     @NotNull
@@ -62,9 +64,13 @@ public class PictureType extends TableAudit {
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
 
-    @OneToMany(mappedBy = "pictureType", cascade = CascadeType.ALL)
+    @NotNull
+    @Column(name = "IsSinglePage")
+    private Byte isSinglePage = 0;
+
+    @OneToMany(mappedBy = "articleType", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Picture> picture;
+    private Set<Article> article;
 
     @Column(name = "Parent")
     private Long parent;

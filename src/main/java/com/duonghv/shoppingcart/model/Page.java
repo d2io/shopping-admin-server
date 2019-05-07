@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 /**
  * Class: Page
@@ -40,8 +39,8 @@ public class Page extends TableAudit {
 
     @NotNull
     @Size(max = 255)
-    @Column(name = "ClassAtrtibute")
-    private String classAtrtibute;
+    @Column(name = "classAttribute")
+    private String classAttribute;
 
     @NotNull
     @Size(max = 255)

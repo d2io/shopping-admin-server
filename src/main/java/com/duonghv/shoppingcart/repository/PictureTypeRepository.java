@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.repository;
 
-import com.duonghv.shoppingcart.model.PictureType;
+import com.duonghv.shoppingcart.model.picture.PictureType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,16 +1,23 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.product;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
+import com.duonghv.shoppingcart.model.picture.PictureType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Class: Product
+ * Author: DuongHV
+ * Created: 07/05/2019 08:01
+ */
+
 @Entity
-@Table(name = "tblpicture")
+@Table(name = "tblproduct")
 @Data
-public class Picture extends TableAudit {
+public class Product extends TableAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
