@@ -2,7 +2,7 @@ package com.duonghv.shoppingcart.controller;
 
 import com.duonghv.shoppingcart.payload.UserIdentityAvailability;
 import com.duonghv.shoppingcart.payload.UserSummary;
-import com.duonghv.shoppingcart.repository.UserRepository;
+import com.duonghv.shoppingcart.repository.auth.UserRepository;
 import com.duonghv.shoppingcart.security.CurrentUser;
 import com.duonghv.shoppingcart.security.UserPrincipal;
 import org.slf4j.Logger;

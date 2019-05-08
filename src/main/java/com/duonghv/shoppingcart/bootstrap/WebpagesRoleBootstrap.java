@@ -1,6 +1,6 @@
 //package com.duonghv.shoppingcart.bootstrap;
 //
-//import com.duonghv.shoppingcart.model.RoleName;
+//import com.duonghv.shoppingcart.model.auth.RoleName;
 //import com.duonghv.shoppingcart.model.WebpagesRole;
 //import com.duonghv.shoppingcart.repository.WebpagesRoleRepository;
 //import org.springframework.context.ApplicationListener;

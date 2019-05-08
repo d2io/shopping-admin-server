@@ -1,8 +1,8 @@
 package com.duonghv.shoppingcart.security;
 
 import com.duonghv.shoppingcart.exception.ResourceNotFoundException;
-import com.duonghv.shoppingcart.model.User;
-import com.duonghv.shoppingcart.repository.UserRepository;
+import com.duonghv.shoppingcart.model.auth.User;
+import com.duonghv.shoppingcart.repository.auth.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

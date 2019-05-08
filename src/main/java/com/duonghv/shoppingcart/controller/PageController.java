@@ -1,7 +1,7 @@
 package com.duonghv.shoppingcart.controller;
 
-import com.duonghv.shoppingcart.model.Page;
-import com.duonghv.shoppingcart.repository.PageRepository;
+import com.duonghv.shoppingcart.model.page.Page;
+import com.duonghv.shoppingcart.repository.page.PageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

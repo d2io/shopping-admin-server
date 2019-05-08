@@ -1,7 +1,6 @@
 package com.duonghv.shoppingcart.model.product;
 
-import com.duonghv.shoppingcart.model.audit.TableAudit;
-import com.duonghv.shoppingcart.model.picture.PictureType;
+import com.duonghv.shoppingcart.model.audit.ProductAudit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -17,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tblproduct")
 @Data
-public class Product extends TableAudit {
+public class Product extends ProductAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,35 +28,56 @@ public class Product extends TableAudit {
     private String name;
 
     @NotNull
-    @Column(name = "FileName")
-    private String fileName;
+    @Column(name = "NameAscii")
+    private String nameAscii;
+
+    @NotNull
+    @Column(name = "Serial")
+    private String serial;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "TypeID")
+    @JsonManagedReference
+    private ProductType productType;
+
+    @NotNull
+    @Column(name = "Manufacturer")
+    private Long manufacturer;
+
+    @NotNull
+    @Column(name = "Distributor")
+    private Long distributor;
+
+    @NotNull
+    @Column(name = "Price")
+    private Long price;
+
+    @NotNull
+    @Column(name = "Quantity")
+    private Long quantity;
+
+    @NotNull
+    @Column(name = "PictureID")
+    private Long pictureID;
+
+    @NotNull
+    @Column(name = "HighLights")
+    private String highLights;
 
     @NotNull
     @Column(name = "Summary")
     private String summary;
 
     @NotNull
-    @Column(name = "Alt")
-    private String alt;
+    @Column(name = "Detail")
+    private String detail;
 
     @NotNull
-    @Column(name = "Link")
-    private String link;
+    @Column(name = "Number")
+    private Long number;
 
     @NotNull
-    @Column(name = "Size")
-    private Long size;
+    @Column(name = "Viewed")
+    private Long viewed;
 
-    @NotNull
-    @Column(name = "IsShow")
-    private Byte isShow = 1;
-
-    @NotNull
-    @Column(name = "IsDeleted")
-    private Byte isDeleted = 0;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "TypeID")
-    @JsonManagedReference
-    private PictureType pictureType;
 }

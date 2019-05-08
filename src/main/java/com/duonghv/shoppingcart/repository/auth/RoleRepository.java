@@ -1,7 +1,7 @@
-package com.duonghv.shoppingcart.repository;
+package com.duonghv.shoppingcart.repository.auth;
 
-import com.duonghv.shoppingcart.model.Role;
-import com.duonghv.shoppingcart.model.RoleName;
+import com.duonghv.shoppingcart.model.auth.Role;
+import com.duonghv.shoppingcart.model.auth.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

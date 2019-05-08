@@ -1,6 +1,6 @@
-package com.duonghv.shoppingcart.repository;
+package com.duonghv.shoppingcart.repository.auth;
 
-import com.duonghv.shoppingcart.model.User;
+import com.duonghv.shoppingcart.model.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

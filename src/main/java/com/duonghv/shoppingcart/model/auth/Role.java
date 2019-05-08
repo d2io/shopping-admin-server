@@ -1,17 +1,11 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.auth;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by rajeevkumarsingh on 01/08/17.

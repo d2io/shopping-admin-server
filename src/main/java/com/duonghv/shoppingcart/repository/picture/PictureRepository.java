@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.repository;
+package com.duonghv.shoppingcart.repository.picture;
 
 import com.duonghv.shoppingcart.model.picture.Picture;
 import org.springframework.data.jpa.repository.JpaRepository;

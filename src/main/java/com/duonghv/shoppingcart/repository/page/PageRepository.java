@@ -1,6 +1,6 @@
-package com.duonghv.shoppingcart.repository;
+package com.duonghv.shoppingcart.repository.page;
 
-import com.duonghv.shoppingcart.model.Page;
+import com.duonghv.shoppingcart.model.page.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

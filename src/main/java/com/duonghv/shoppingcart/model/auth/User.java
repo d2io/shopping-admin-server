@@ -1,10 +1,10 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.auth;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
+import com.duonghv.shoppingcart.model.auth.Role;
 import com.duonghv.shoppingcart.payload.SignUpRequest;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

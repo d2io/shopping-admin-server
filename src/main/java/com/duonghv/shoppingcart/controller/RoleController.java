@@ -1,8 +1,8 @@
 package com.duonghv.shoppingcart.controller;
 
-import com.duonghv.shoppingcart.model.Role;
+import com.duonghv.shoppingcart.model.auth.Role;
 import com.duonghv.shoppingcart.payload.RoleRequest;
-import com.duonghv.shoppingcart.repository.RoleRepository;
+import com.duonghv.shoppingcart.repository.auth.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

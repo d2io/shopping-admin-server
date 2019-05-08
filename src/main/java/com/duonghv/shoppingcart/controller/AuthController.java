@@ -1,15 +1,15 @@
 package com.duonghv.shoppingcart.controller;
 
 import com.duonghv.shoppingcart.exception.AppException;
-import com.duonghv.shoppingcart.model.Role;
-import com.duonghv.shoppingcart.model.RoleName;
-import com.duonghv.shoppingcart.model.User;
+import com.duonghv.shoppingcart.model.auth.Role;
+import com.duonghv.shoppingcart.model.auth.RoleName;
+import com.duonghv.shoppingcart.model.auth.User;
 import com.duonghv.shoppingcart.payload.ApiResponse;
 import com.duonghv.shoppingcart.payload.JwtAuthenticationResponse;
 import com.duonghv.shoppingcart.payload.LoginRequest;
 import com.duonghv.shoppingcart.payload.SignUpRequest;
-import com.duonghv.shoppingcart.repository.RoleRepository;
-import com.duonghv.shoppingcart.repository.UserRepository;
+import com.duonghv.shoppingcart.repository.auth.RoleRepository;
+import com.duonghv.shoppingcart.repository.auth.UserRepository;
 import com.duonghv.shoppingcart.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.auth;
 
 public enum RoleName {
     ROLE_USER,

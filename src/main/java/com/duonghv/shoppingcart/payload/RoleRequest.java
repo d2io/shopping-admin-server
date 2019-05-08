@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.payload;
 
-import com.duonghv.shoppingcart.model.RoleName;
+import com.duonghv.shoppingcart.model.auth.RoleName;
 import lombok.Data;
 
 /**

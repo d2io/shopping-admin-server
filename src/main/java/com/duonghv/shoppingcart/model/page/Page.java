@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.model;
+package com.duonghv.shoppingcart.model.page;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
 import lombok.Getter;

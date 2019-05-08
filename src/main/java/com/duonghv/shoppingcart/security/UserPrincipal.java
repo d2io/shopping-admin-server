@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.security;
 
-import com.duonghv.shoppingcart.model.User;
+import com.duonghv.shoppingcart.model.auth.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
