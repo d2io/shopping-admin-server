@@ -38,7 +38,7 @@ public class ArticleController {
     }
 
     @GetMapping("/type/{id}")
-    public ArticleType getArticleTypes(@PathVariable Long id) {
+    public ArticleType getArticleType(@PathVariable Long id) {
         ArticleType articleType = articleTypeRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("ArticleType", "id", id));
         return articleType;
@@ -46,7 +46,8 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getArticle(@PathVariable Long id) {
-        Article article = articleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Article", "id", id));
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Article", "id", id));
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
 }
