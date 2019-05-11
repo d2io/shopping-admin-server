@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.model.article;
 
-import com.duonghv.shoppingcart.model.audit.ProductAudit;
+import com.duonghv.shoppingcart.model.audit.SEOAudit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tblarticle")
 @Data
-public class Article extends ProductAudit {
+public class Article extends SEOAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

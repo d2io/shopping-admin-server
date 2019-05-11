@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.model.product;
+package com.duonghv.shoppingcart.model.article;
 
 import com.duonghv.shoppingcart.model.audit.SEOAudit;
 import lombok.Data;
@@ -7,15 +7,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class: Manufacturer
+ * Class: ArticleGroup
  * Author: DuongHV
- * Created: 07/05/2019 08:05
+ * Created: 11/05/2019 18:20
  */
 
 @Entity
-@Table(name = "tblmanufacturer")
+@Table(name = "tblgrouparticle")
 @Data
-public class Manufacturer extends SEOAudit {
+public class ArticleGroup extends SEOAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -23,11 +23,11 @@ public class Manufacturer extends SEOAudit {
 
     @NotNull
     @Column(name = "Name")
-    private String name;
+    private String title;
 
     @NotNull
     @Column(name = "NameAscii")
-    private String nameAscii;
+    private String titleAscii;
 
     @NotNull
     @Column(name = "Number")
@@ -44,4 +44,13 @@ public class Manufacturer extends SEOAudit {
     @NotNull
     @Column(name = "Detail")
     private String detail;
+
+    @NotNull
+    @Column(name = "IsShowHome")
+    private Byte isShowHome;
+
+    @NotNull
+    @Column(name = "IsShowMenu")
+    private Byte isShowMenu;
+
 }

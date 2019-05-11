@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.model.product;
 
-import com.duonghv.shoppingcart.model.audit.ProductAudit;
+import com.duonghv.shoppingcart.model.audit.SEOAudit;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tblproduct")
 @Data
-public class Product extends ProductAudit {
+public class Product extends SEOAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +40,11 @@ public class Product extends ProductAudit {
     @JsonManagedReference
     private ProductType productType;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "Manufacturer")
-    @JsonManagedReference
-    private Manufacturer manufacturer;
+    @Column(name = "Manufacturer")
+    private Long manufacturer;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "Distributor")
-    @JsonManagedReference
-    private Distributor distributor;
+    @Column(name = "Distributor")
+    private Long distributor;
 
     @Column(name = "Price")
     private Long price;

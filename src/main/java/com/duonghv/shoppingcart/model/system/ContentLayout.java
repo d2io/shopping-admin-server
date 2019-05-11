@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.model.product;
+package com.duonghv.shoppingcart.model.system;
 
 import com.duonghv.shoppingcart.model.audit.SEOAudit;
 import lombok.Data;
@@ -7,15 +7,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class: Manufacturer
+ * Class: ContentLayout
  * Author: DuongHV
- * Created: 07/05/2019 08:05
+ * Created: 11/05/2019 19:07
  */
 
 @Entity
-@Table(name = "tblmanufacturer")
+@Table(name = "tbllayoutcontent")
 @Data
-public class Manufacturer extends SEOAudit {
+public class ContentLayout extends SEOAudit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -30,10 +31,6 @@ public class Manufacturer extends SEOAudit {
     private String nameAscii;
 
     @NotNull
-    @Column(name = "Number")
-    private Long number;
-
-    @NotNull
     @Column(name = "PictureID")
     private Long pictureID;
 
@@ -44,4 +41,8 @@ public class Manufacturer extends SEOAudit {
     @NotNull
     @Column(name = "Detail")
     private String detail;
+
+    @NotNull
+    @Column(name = "LanguageId")
+    private Long languageId;
 }

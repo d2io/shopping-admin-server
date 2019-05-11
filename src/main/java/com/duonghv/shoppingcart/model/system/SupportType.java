@@ -1,21 +1,21 @@
-package com.duonghv.shoppingcart.model.product;
+package com.duonghv.shoppingcart.model.system;
 
-import com.duonghv.shoppingcart.model.audit.SEOAudit;
+import com.duonghv.shoppingcart.model.audit.TableAudit;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class: ProductFilter
+ * Class: Support
  * Author: DuongHV
- * Created: 07/05/2019 08:08
+ * Created: 11/05/2019 18:59
  */
 
 @Entity
-@Table(name = "tblproductfilter")
+@Table(name = "tbltypesupport")
 @Data
-public class ProductFilter extends SEOAudit {
+public class SupportType extends TableAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -26,16 +26,8 @@ public class ProductFilter extends SEOAudit {
     private String name;
 
     @NotNull
-    @Column(name = "NameAscii")
-    private String nameAscii;
-
-    @NotNull
     @Column(name = "Number")
     private Long number;
-
-    @NotNull
-    @Column(name = "Parent")
-    private Long parent;
 
     @NotNull
     @Column(name = "Detail")
@@ -44,4 +36,13 @@ public class ProductFilter extends SEOAudit {
     @NotNull
     @Column(name = "LanguageId")
     private Long languageId;
+
+    @NotNull
+    @Column(name = "IsShow")
+    private Byte isShow;
+
+    @NotNull
+    @Column(name = "IsDeleted")
+    private Byte isDeleted;
+
 }

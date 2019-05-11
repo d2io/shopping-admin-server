@@ -1,6 +1,6 @@
 package com.duonghv.shoppingcart.model.product;
 
-import com.duonghv.shoppingcart.model.audit.ProductAudit;
+import com.duonghv.shoppingcart.model.audit.SEOAudit;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tbldistributor")
 @Data
-public class Distributor extends ProductAudit {
+public class Distributor extends SEOAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

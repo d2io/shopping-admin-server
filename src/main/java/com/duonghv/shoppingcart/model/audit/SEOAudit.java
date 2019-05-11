@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
 @MappedSuperclass
-public class ProductAudit extends TableAudit {
+public class SEOAudit extends TableAudit {
     @NotNull
     @Column(name = "SEOTitle")
     private String seoTitle;
