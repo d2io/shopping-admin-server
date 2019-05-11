@@ -1,9 +1,12 @@
 package com.duonghv.shoppingcart.model.product;
 
+import com.duonghv.shoppingcart.model.picture.Picture;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Class: ProductType
@@ -32,9 +35,9 @@ public class ProductType {
     @Column(name = "Detail")
     private String detail;
 
-    @NotNull
-    @Column(name = "PictureID")
-    private Long pictureID;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PictureID", referencedColumnName = "ID", insertable = false, updatable = false)
+    private Picture picture;
 
     @NotNull
     @Column(name = "Number")
@@ -51,4 +54,8 @@ public class ProductType {
     @NotNull
     @Column(name = "LanguageId")
     private Long languageId;
+
+    @OneToMany(mappedBy = "productType", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Set<Product> products;
 }

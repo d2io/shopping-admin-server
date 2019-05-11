@@ -1,7 +1,6 @@
 package com.duonghv.shoppingcart.model.product;
 
 import com.duonghv.shoppingcart.model.audit.ProductAudit;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;

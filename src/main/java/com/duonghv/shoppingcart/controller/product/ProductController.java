@@ -1,4 +1,4 @@
-package com.duonghv.shoppingcart.controller;
+package com.duonghv.shoppingcart.controller.product;
 
 import com.duonghv.shoppingcart.exception.ResourceNotFoundException;
 import com.duonghv.shoppingcart.model.product.Product;
@@ -44,9 +44,15 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getArticle(@PathVariable Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ProductType", "id", id));
+    public ResponseEntity<?> getProduct(@PathVariable Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllProduct() {
+        List<Product> product = productRepository.findAll();
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
 }

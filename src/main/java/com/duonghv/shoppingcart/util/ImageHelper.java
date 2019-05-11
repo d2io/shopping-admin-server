@@ -10,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class: ImageUtil
+ * Class: ImageHelper
  * Author: DuongHV
  * Created: 28/03/2019 16:34
  */
 
-public class ImageUtil {
+public class ImageHelper {
 
     @Value("${app.file.uploaded}")
     private String rootImgPath;

@@ -40,15 +40,16 @@ public class Product extends ProductAudit {
     @JsonManagedReference
     private ProductType productType;
 
-    @NotNull
-    @Column(name = "Manufacturer")
-    private Long manufacturer;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "Manufacturer")
+    @JsonManagedReference
+    private Manufacturer manufacturer;
 
-    @NotNull
-    @Column(name = "Distributor")
-    private Long distributor;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "Distributor")
+    @JsonManagedReference
+    private Distributor distributor;
 
-    @NotNull
     @Column(name = "Price")
     private Long price;
 
@@ -76,7 +77,6 @@ public class Product extends ProductAudit {
     @Column(name = "Number")
     private Long number;
 
-    @NotNull
     @Column(name = "Viewed")
     private Long viewed;
 
