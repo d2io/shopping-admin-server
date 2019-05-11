@@ -1,8 +1,6 @@
 package com.duonghv.shoppingcart.model.customer;
 
 import com.duonghv.shoppingcart.model.audit.TableAudit;
-import com.duonghv.shoppingcart.model.picture.PictureType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -57,8 +55,7 @@ public class Customer extends TableAudit {
     @Column(name = "IsDeleted")
     private Byte isDeleted = 0;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "PictureID")
-    @JsonManagedReference
-    private PictureType pictureType;
+    @NotNull
+    @Column(name = "PictureID")
+    private Long pictureID;
 }
