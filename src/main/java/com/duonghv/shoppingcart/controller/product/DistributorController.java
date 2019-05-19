@@ -26,7 +26,7 @@ public class DistributorController {
     @Autowired
     DistributorRepository distributorRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllDistributors() {
         List<Distributor> distributors = distributorRepository.findAll();
         return new ResponseEntity<>(distributors, HttpStatus.OK);

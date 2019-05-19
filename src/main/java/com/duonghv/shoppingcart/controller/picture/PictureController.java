@@ -1,11 +1,9 @@
-package com.duonghv.shoppingcart.controller;
+package com.duonghv.shoppingcart.controller.picture;
 
 import com.duonghv.shoppingcart.exception.ResourceNotFoundException;
 import com.duonghv.shoppingcart.model.picture.Picture;
-import com.duonghv.shoppingcart.model.picture.PictureType;
 import com.duonghv.shoppingcart.payload.PictureRequest;
 import com.duonghv.shoppingcart.repository.picture.PictureRepository;
-import com.duonghv.shoppingcart.repository.picture.PictureTypeRepository;
 import com.duonghv.shoppingcart.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +27,6 @@ public class PictureController {
     PictureService pictureService;
 
     @Autowired
-    PictureTypeRepository pictureTypeRepository;
-
-    @Autowired
     PictureRepository pictureRepository;
 
     @PostMapping("/add")
@@ -47,17 +42,10 @@ public class PictureController {
         }
     }
 
-    @GetMapping("/types")
-    public List<PictureType> getPictureTypes() {
-        List<PictureType> pictureTypeList = pictureTypeRepository.findAll();
-        return pictureTypeList;
-    }
-
-    @GetMapping("/types/{id}")
-    public PictureType getPictureTypes(@PathVariable Long id) {
-        PictureType pictureType = pictureTypeRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("PictureType", "id", id));
-        return pictureType;
+    @GetMapping("/")
+    public List<Picture> getPictureTypes() {
+        List<Picture> pictureList = pictureRepository.findAll();
+        return pictureList;
     }
 
     @GetMapping("/{id}")

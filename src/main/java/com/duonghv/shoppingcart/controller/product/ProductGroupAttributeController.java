@@ -26,7 +26,7 @@ public class ProductGroupAttributeController {
     @Autowired
     ProductGroupAttributeRepository productGroupAttributeRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductGroupAttribute> productGroupAttributes = productGroupAttributeRepository.findAll();
         return new ResponseEntity<>(productGroupAttributes, HttpStatus.OK);

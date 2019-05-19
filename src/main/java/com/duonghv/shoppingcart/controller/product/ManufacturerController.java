@@ -25,7 +25,7 @@ public class ManufacturerController {
     @Autowired
     ManufacturerRepository manufacturerRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllDistributors() {
         List<Manufacturer> manufacturers = manufacturerRepository.findAll();
         return new ResponseEntity<>(manufacturers, HttpStatus.OK);

@@ -26,7 +26,7 @@ public class ProductVariantController {
     @Autowired
     ProductVariantRepository productVariantRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductVariant> productVariants = productVariantRepository.findAll();
         return new ResponseEntity<>(productVariants, HttpStatus.OK);

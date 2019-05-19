@@ -26,7 +26,7 @@ public class ProductStatusController {
     @Autowired
     ProductStatusRepository productStatusRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductStatus> productStatuses = productStatusRepository.findAll();
         return new ResponseEntity<>(productStatuses, HttpStatus.OK);

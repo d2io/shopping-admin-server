@@ -26,7 +26,7 @@ public class ProductTypeGroupController {
     @Autowired
     ProductTypeGroupRepository productTypeGroupRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductTypeGroup> productTypeGroups = productTypeGroupRepository.findAll();
         return new ResponseEntity<>(productTypeGroups, HttpStatus.OK);

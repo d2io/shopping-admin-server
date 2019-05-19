@@ -26,7 +26,7 @@ public class ProductFilterController {
     @Autowired
     ProductFilterRepository productFilterRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductFilter> productFilters = productFilterRepository.findAll();
         return new ResponseEntity<>(productFilters, HttpStatus.OK);

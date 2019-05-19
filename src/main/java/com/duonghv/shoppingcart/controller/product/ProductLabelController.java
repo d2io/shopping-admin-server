@@ -26,7 +26,7 @@ public class ProductLabelController {
     @Autowired
     ProductLabelRepository productLabelRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<?> getAllProductVariants() {
         List<ProductLabel> productVariants = productLabelRepository.findAll();
         return new ResponseEntity<>(productVariants, HttpStatus.OK);
