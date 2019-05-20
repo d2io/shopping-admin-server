@@ -1,10 +1,8 @@
-package com.duonghv.shoppingcart.controller;
+package com.duonghv.shoppingcart.controller.article;
 
 import com.duonghv.shoppingcart.exception.ResourceNotFoundException;
 import com.duonghv.shoppingcart.model.article.Article;
-import com.duonghv.shoppingcart.model.article.ArticleType;
 import com.duonghv.shoppingcart.repository.article.ArticleRepository;
-import com.duonghv.shoppingcart.repository.article.ArticleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,22 +24,12 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    ArticleTypeRepository articleTypeRepository;
-
-    @Autowired
     ArticleRepository articleRepository;
 
-    @GetMapping("/types")
-    public List<ArticleType> getArticleTypes() {
-        List<ArticleType> articleTypeList = articleTypeRepository.findAll();
-        return articleTypeList;
-    }
-
-    @GetMapping("/type/{id}")
-    public ArticleType getArticleType(@PathVariable Long id) {
-        ArticleType articleType = articleTypeRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("ArticleType", "id", id));
-        return articleType;
+    @GetMapping
+    public List<Article> getArticles() {
+        List<Article> articleList = articleRepository.findAll();
+        return articleList;
     }
 
     @GetMapping("/{id}")

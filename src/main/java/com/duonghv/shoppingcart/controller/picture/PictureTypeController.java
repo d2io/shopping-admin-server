@@ -24,7 +24,7 @@ public class PictureTypeController {
     @Autowired
     PictureTypeRepository pictureTypeRepository;
 
-    @GetMapping("/")
+    @GetMapping
     public List<PictureType> getPictureTypes() {
         List<PictureType> pictureTypeList = pictureTypeRepository.findAll();
         return pictureTypeList;

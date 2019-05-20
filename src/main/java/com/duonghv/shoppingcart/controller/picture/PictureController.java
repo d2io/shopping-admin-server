@@ -42,7 +42,7 @@ public class PictureController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Picture> getPictureTypes() {
         List<Picture> pictureList = pictureRepository.findAll();
         return pictureList;
